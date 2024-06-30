@@ -59,10 +59,13 @@ run = client.beta.threads.runs.create_and_poll(
     thread_id=thread.id, assistant_id=assistant.id
 )
 
-messages = list(client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))
-
-# messages[0].content[0].text.value
-
+# list all thread messages
+messages = list(client.beta.threads.messages.list(
+    thread_id=thread.id, 
+    run_id=run.id, 
+    # limit=5
+    )
+)
 
 message_content = messages[0].content[0].text
 annotations = message_content.annotations
